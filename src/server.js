@@ -27,6 +27,27 @@ app.get('/get-lyrics', (req, res) =>{
     })
 })
 
+
+
+app.get('/search', (req, res) =>{
+    const searchTerm = req.query.search_term
+
+    // Run the python script with the song name and artist as arguments
+    exec(`python scripts/lyricsApi.py "${searchTerm}" `, (error, stdout, stderr) => {
+        if(error){
+            console.error(`Error executing python script: ${error.message}`)
+            return res.status(500).send("Server Error")
+        }
+        if(stderr){
+            console.error(`Python script stderr: ${stderr}`)
+            return res.status(500).send("Error Searching")
+        }
+
+        //send the search back to the client
+        res.send({search: stdout })
+    })
+})
+
 app.listen(port, () =>{
     console.log(`server running on port ${port}`)
 })
