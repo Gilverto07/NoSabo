@@ -18,6 +18,68 @@ html, body{
   flex-direction: column;
 }
 
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: 'Bungee Shade', cursive;
+  padding: 20px;
+  color: white
+}
+.title-name {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.title-name a {
+  color: white;
+}
+.title-name a:hover {
+  color: white;
+}
+
+.search {
+  margin: 20px;
+  padding: 20px;
+  width: 65vw;
+  align-self: center;
+}
+.search-song {
+  width: 100%;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-bottom: 1px solid white;
+  color: white;
+  height: 30px;
+  border-right: none;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+.search-song:focus {
+  outline: none;
+}
+
+.results {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+  padding-top: 10px;
+  margin-bottom: -20px;
+}
+.result {
+  border-bottom: 1px solid White;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.result:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.result.result-last {
+  border-bottom: none;
+}
+
 footer{
   height: 74px;
   display: flex;
@@ -28,20 +90,3 @@ footer{
   font-weight: 500;
 }
 
-/* landing page */
-.landing-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* Full viewport height */
-  text-align: center;
-}
-
-/* Container for the buttons */
-.button-container {
-  display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  gap: 20px; /* Space between buttons */
-  margin-top: 20px;
-}
