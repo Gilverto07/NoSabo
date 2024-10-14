@@ -4,12 +4,13 @@ import Footer from "./components/Footer"
 import Home from "./pages/Home"
 
 function App() {
+  
   return (
     <>
       <div className="site-wrapper">
         <Search />
         <main>
-          <Home />
+          <Home /> { /* empty */ }
         </main>
         <Footer />
       </div>

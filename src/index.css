@@ -67,17 +67,11 @@ html, body{
 }
 .result {
   border-bottom: 1px solid White;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 20px;
   cursor: pointer;
 }
 .result:hover {
   background-color: rgba(255, 255, 255, 0.05);
-}
-.result.result-last {
-  border-bottom: none;
 }
 
 footer{
@@ -88,5 +82,29 @@ footer{
   align-items: center;
   margin-top: auto;
   font-weight: 500;
+}
+
+.lyrics{
+  display: flex;
+  padding-top:30px;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+.lyrics-left-side{
+  flex:1;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-right: 2px solid white;
+}
+
+.lyrics-right-side{
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
