@@ -1,4 +1,7 @@
 //Authorization code flow with PKCE from the spotify api documentation
+// import dotenv from "dotenv"
+// dotenv.config()
+
 const clientId = import.meta.env.VITE_CLIENT_ID
 const params = new URLSearchParams(window.location.search)
 const code = params.get("code")
@@ -98,18 +101,59 @@ export async function fetchProfile(token) {
     return await result.json();
 }
 
-// function populateUI(profile) {
-//     document.getElementById("displayName").innerText = profile.display_name;
-//     // if (profile.images[0]) {
-//     //     const profileImage = new Image(200, 200);
-//     //     profileImage.src = profile.images[0].url;
-//     //     document.getElementById("avatar").appendChild(profileImage);
-//     //     document.getElementById("imgUrl").innerText = profile.images[0].url;
-//     // }
-//     document.getElementById("id").innerText = profile.id;
-//     document.getElementById("email").innerText = profile.email;
-//     document.getElementById("uri").innerText = profile.uri;
-//     document.getElementById("uri").setAttribute("href", profile.external_urls.spotify);
-//     document.getElementById("url").innerText = profile.href;
-//     document.getElementById("url").setAttribute("href", profile.href);
-// }
+///////////////openai API//////////////////
+
+const apiKey = import.meta.env.VITE_CHATGPT
+
+export async function* streamChatResponse(prompt){
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+            model: 'gpt-4o-mini',
+            messages : [
+                {
+                    role: 'system', 
+                    content: "You wil be given the lyrics to a song in spanish, some containing slang. Translate to English and vice-versa if needed. Only return the translated lyrics." 
+                },
+                {
+                    role: "user",
+                    content: prompt
+                }
+            ],
+            stream: true,
+        }),
+    })
+    
+
+    const reader = res.body.getReader()
+    const decoder = new TextDecoder('utf-8')
+    let result = ''
+    
+    while (true){
+        const { done, value } = await reader.read()
+        if(done){
+            break
+        } 
+        result += decoder.decode(value, { stream: true })
+        const parsed = parseStreamChunk(result)
+        if(parsed){
+            yield parsed
+        } 
+    }
+}
+
+function parseStreamChunk(chunk) {
+    try {
+      const lines = chunk.split('\n').filter(line => line.trim() !== '' && line.startsWith('data: '));
+      const jsonData = lines.map(line => JSON.parse(line.replace(/^data: /, '')));
+      return jsonData.map(item => item.choices[0]?.delta.content)?.join('');
+    } catch (error) {
+      console.error('Error parsing chunk:', error);
+      return null;
+    }
+}
+  
