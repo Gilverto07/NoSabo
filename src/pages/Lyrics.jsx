@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { streamChatResponse } from "../api"
+import { streamChatResponse } from "../api.js"
 
 export default function Lyrics(props){
     const [response, setResponse] = useState('')
