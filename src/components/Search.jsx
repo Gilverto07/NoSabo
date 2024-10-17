@@ -38,7 +38,7 @@ export default function Search(){
     //returns array containing song data
     const fetchSuggestions = async (input) => {
         try{
-            const res = await axios.get("http://localhost:5000/search" ,{
+            const res = await axios.get("https://noosabo.netlify.app/search" ,{
                 params: { input }
             })
             return res.data //array of songs 
@@ -50,7 +50,7 @@ export default function Search(){
     //returns lyrics
      const fetchLyrics = async (input) => {
         try{
-        const res = await axios.get("http://localhost:5000/lyrics", {
+        const res = await axios.get("https://noosabo.netlify.app/lyrics", {
             params:{ input }
         })
         setLyrics(res.data.lyrics)
