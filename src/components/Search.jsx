@@ -84,8 +84,9 @@ export default function Search(){
                     ))}
                     </ul>
                 )}
-                <Lyrics lyrics={lyrics}/>
             </div>
+            <Lyrics lyrics={lyrics}/>
+
         </>
     )
 }
