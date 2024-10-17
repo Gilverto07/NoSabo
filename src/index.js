@@ -13,7 +13,6 @@ app.get('/search', async (req, res) =>{
         const results = await search(input)
         res.json(results)
     }catch(error){
-        console.error("Search Error: ", error)
         res.status(500).json({ error: "Failed to search songs" })
     }
 })
@@ -24,7 +23,6 @@ app.get('/lyrics', async (req, res) =>{
         const lyrics = await getLyrics(input)
         res.json({ lyrics })
     }catch(error){
-        console.error("Failed to get lyrics: ", error)
         res.status(500).json({ error: "Failed to get lyrics" })
     }
 })

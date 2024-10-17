@@ -35,7 +35,7 @@ export default function Search(){
         getSuggestions()
     }, [debouncedQuery])
 
-    //returns array containing song names
+    //returns array containing song data
     const fetchSuggestions = async (input) => {
         try{
             const res = await axios.get("http://localhost:5000/search" ,{
@@ -47,6 +47,7 @@ export default function Search(){
         }
     }
 
+    //returns lyrics
      const fetchLyrics = async (input) => {
         try{
         const res = await axios.get("http://localhost:5000/lyrics", {
