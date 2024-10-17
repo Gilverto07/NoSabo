@@ -108,3 +108,10 @@ footer{
   padding: 20px;
 }
 
+.lyrics-button{
+  display: flex;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
