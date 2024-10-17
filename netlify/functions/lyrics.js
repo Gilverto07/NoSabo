@@ -1,4 +1,4 @@
-import { getLyrics } from "../../../src/genius";
+import { getLyrics } from "../../genius";
 
 export async function handler(event) {
     const { input } = event.queryStringParameters; 

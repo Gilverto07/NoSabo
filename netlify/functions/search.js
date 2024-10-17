@@ -1,4 +1,4 @@
-import { search } from '../../../src/genius';
+import { search } from '../../genius';
 
 export async function handler(event) {
     const { term } = event.queryStringParameters; // Get search term from query

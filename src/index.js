@@ -1,5 +1,5 @@
 import express from 'express'
-import { search, getLyrics } from "./genius.js"
+import { search, getLyrics } from "../genius.js"
 import cors from "cors"
 
 const app = express()
