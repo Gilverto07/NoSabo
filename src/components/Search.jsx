@@ -8,10 +8,6 @@ export default function Search(){
     const [debouncedQuery, setDebouncedQuery] = useState(query)
     const [lyrics, setLyrics] = useState('')
 
-    const handleInputChange = (e) => {
-        setQuery(e.target.value)
-    }
-
     //sets delay before api can be called
     useEffect(() => {
         const handler = setTimeout(() =>{
@@ -35,11 +31,12 @@ export default function Search(){
         getSuggestions()
     }, [debouncedQuery])
 
-    //returns array containing song data
+    //returns array containing song data by calling netlify serverless function
     const fetchSuggestions = async (input) => {
+        const term = input.toString()
         try{
             const res = await axios.get("/.netlify/functions/search" ,{
-                params: { input }
+                params: { term }
             })
             return res.data //array of songs 
         }catch(err){
@@ -47,10 +44,10 @@ export default function Search(){
         }
     }
 
-    //returns lyrics
+    //returns lyrics by calling netlify serverless function
      const fetchLyrics = async (input) => {
         try{
-        const res = await axios.get("/.netlify/functions/search/lyrics", {
+        const res = await axios.get("/.netlify/functions/lyrics", {
             params:{ input }
         })
         setLyrics(res.data.lyrics)
@@ -71,11 +68,13 @@ export default function Search(){
                 <input
                 type="text"
                 value={query}
-                onChange={(handleInputChange)}
+                onChange={(e) => setQuery(e.target.value)}
                 className="search-song"
                 placeholder="Search for the lyrics of a song..."
                 id="search-input"
                 />
+
+                {/* //renders the array of suggestions if it has values */}
                 {suggestions.length > 0 && (
                     <ul className="results" id="results">
                     {suggestions.map((suggestion) => (

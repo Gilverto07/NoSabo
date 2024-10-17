@@ -1,7 +1,8 @@
 import { search } from '../../genius';
 
+//netlify serverless function used to handle api call for search
 export async function handler(event) {
-    const { term } = event.queryStringParameters; // Get search term from query
+    const { term } = event.queryStringParameters;
     try {
         const results = await search(term);
         return {
