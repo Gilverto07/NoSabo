@@ -1,6 +1,6 @@
-const { search } = require('../../../src/genius')
+import { search } from '../../../src/genius';
 
-exports.handler = async (event) => {
+export async function handler(event) {
     const { term } = event.queryStringParameters; // Get search term from query
     try {
         const results = await search(term);
@@ -15,4 +15,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: 'Failed to search songs' }),
         };
     }
-};
+}

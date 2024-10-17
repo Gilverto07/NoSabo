@@ -1,6 +1,6 @@
-const { getLyrics } = require("../../../src/genius")
+import { getLyrics } from "../../../src/genius";
 
-exports.handler = async (event) => {
+export async function handler(event) {
     const { input } = event.queryStringParameters; 
     try {
         const lyrics = await getLyrics(input);
@@ -15,4 +15,4 @@ exports.handler = async (event) => {
             body: JSON.stringify({ error: 'Failed to get lyrics' }),
         };
     }
-};
+}
