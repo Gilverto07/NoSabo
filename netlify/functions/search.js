@@ -1,4 +1,4 @@
-import { search } from '../../genius';
+import { search } from '../../songFunctions';
 
 //netlify serverless function used to handle api call for search
 export async function handler(event) {
