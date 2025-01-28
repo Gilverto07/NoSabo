@@ -1,7 +1,8 @@
 import Genius from "genius-lyrics"
+import { fetchLyrics } from "searchlyrics"
 const client = new Genius.Client(process.env.VITE_GENIUS)
 const songsClient = new Genius.SongsClient(client)
-const { fetchLyrics } = require('searchlyrics')
+
 
 //returns the top five results of a search term
 export async function search(searchTerm){
