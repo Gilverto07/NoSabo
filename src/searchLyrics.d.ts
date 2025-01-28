@@ -1,1 +1,1 @@
-declare module 'searchLyrics'
+declare module 'searchlyrics'
