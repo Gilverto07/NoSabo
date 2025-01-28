@@ -24,6 +24,7 @@ export default function Search(){
             if(debouncedQuery.length > 0){
                 const results = await fetchSuggestions(debouncedQuery)
                 setSuggestions(results)
+                console.log(results)
             }else{
                 setSuggestions([])
             }
@@ -78,7 +79,7 @@ export default function Search(){
                 {suggestions.length > 0 && (
                     <ul className="results" id="results">
                     {suggestions.map((suggestion) => (
-                        <li onClick={() => fetchLyrics(suggestion.songURL)} key={suggestion.index}className="result">
+                        <li onClick={() => fetchLyrics(suggestion.fullTitle)} key={suggestion.index}className="result">
                         {suggestion.fullTitle}
                         </li>
                     ))}

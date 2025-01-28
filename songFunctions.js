@@ -1,5 +1,5 @@
 import Genius from "genius-lyrics"
-import { fetchLyrics } from "searchlyrics"
+import { find } from "llyrics"
 const client = new Genius.Client(process.env.VITE_GENIUS)
 const songsClient = new Genius.SongsClient(client)
 
@@ -27,9 +27,12 @@ export async function search(searchTerm){
 
 export async function getSongLyrics(song){
     try{
-        console.log(song)
-        const lyrics = await fetchLyrics(song)
-        return lyrics.lyrics
+        const response = await find({
+            song: song,
+            engine: "musixmatch",
+            forceSearch: true
+        })
+        return response.lyrics
     }catch(error){
         console.error("Get lyrics function error: ", error)
     }
